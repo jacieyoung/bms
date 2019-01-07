@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>mms</display-name>
+  
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath*:applicationContext.xml</param-value>
+  </context-param>
+  
+  <!-- ================================================================================ -->
+  <!-- spring configure -->
+  <!-- ================================================================================ -->
+  <listener> <!-- spring context load listener -->
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  <!--
+  <listener>  
+        <listener-class>com.yd.common.runtime.CIPRuntimeContextListener</listener-class>
+  </listener>
+  -->
+  
+ 
+  <servlet> <!-- spring dispatcher servlet  -->
+    <servlet-name>spring-web</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <init-param>
+      <param-name>transformWsdlLocations</param-name>
+      <param-value>true</param-value>
+    </init-param>
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value></param-value>
+    </init-param>
+    <init-param>
+      <param-name>debug</param-name>
+      <param-value>false</param-value>
+    </init-param>
+    <load-on-startup>0</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>spring-web</servlet-name>
+    <url-pattern>*.do</url-pattern> <!-- make all dynamic requests end with ".action" -->
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>spring-web</servlet-name>
+    <url-pattern>*.ws</url-pattern> 
+  </servlet-mapping>
+  
+  <!-- ================================================================================ -->
+  <!-- filters configure -->
+  <!-- ================================================================================ -->
+
+
+</web-app>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+ 	<title>导入模板</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" type="text/css" href="../../js/jquery-easyui/themes/gray/easyui.css"/>
+	<link rel="stylesheet" type="text/css" href="../../js/jquery-easyui/themes/icon.css"/>
+	<link rel="stylesheet" type="text/css" href="../../css/common.css"/>
+	<script type="text/javascript" src="../../js/jquery-easyui/jquery.min.js"></script>
+	<script type="text/javascript" src="../../js/jquery-easyui/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="../../js/jquery-easyui/locale/easyui-lang-zh_CN.js"></script>
+	<script src="../../js/jquery.form.js" type="text/javascript"></script>
+	<script type="text/javascript" src="../../js/cip-page1.0.js"></script>
+	<script type="text/javascript" src="../../js/jcdf-contants-1.0.js"></script>
+	<script type="text/javascript" src="../../js/cip_import_form.js"></script>
+	<script type="text/javascript">
+		$(document).ready(init);
+	</script>
+</head>
+<body>
+<div id="area_form">
+	<form id="form_import" class="form" method="post" enctype="multipart/form-data">
+		<table>
+			<tr>
+				<td align="right">
+					<label for="importFile" id="importFileName">导入文件：</label>
+				</td>
+				<td align="left">
+                 	<input type="file" id="importFile" name="importFile" style="height:26px;width:220px" />
+				</td>
+			</tr>
+			<tr>
+  				<td align="right">
+					<label for="import_template" id="templateFileName">模板文件：</label>
+				</td>
+				<td align="left">
+					<a id="import_template" name="import_template" href="#" class="easyui-linkbutton" iconCls="icon-download">单击下载</a>
+				</td>
+			</tr>
+		</table>
+	</form>
+</div>
+	<div class="button-section">
+		<a id="btn_save" href="#" class="easyui-linkbutton" iconCls="icon-ok">确定</a>
+		<a id="btn_cancel" href="#" class="easyui-linkbutton" iconCls="icon-cancel">取消</a>
+	</div>
+</body>
+</html>

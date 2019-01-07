@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" type="text/css" href="../../js/jquery-easyui/themes/gray/easyui.css"/>
+	<link rel="stylesheet" type="text/css" href="../../js/jquery-easyui/themes/icon.css"/>
+	<link rel="stylesheet" type="text/css" href="../../css/common.css"/>
+	<script type="text/javascript" src="../../js/jquery-easyui/jquery.min.js"></script>
+	<script type="text/javascript" src="../../js/jquery-easyui/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="../../js/jquery-easyui/locale/easyui-lang-zh_CN.js"></script>
+	<script type="text/javascript" src="../../js/cip-page1.0.js"></script>
+	<script type="text/javascript" src="../../js/jcdf-contants-1.0.js"></script>
+	<script type="text/javascript" src="../../logic/statement/bms_statement_borrowing_update_form.js"></script>
+	<script type="text/javascript" >
+		$(document).ready(init);
+	</script>
+</head>
+<body>
+	<div id="area_form">
+	<form id="form_bms_statement_borrowing" class="form">
+		<table>
+		<tr>
+			<td align='left'>
+			<label for='lcbh'>流程编号:</label>
+			</td>
+			<td>
+			<input type='text' id='lcbh' name='lcbh' class='easyui-validatebox' data-options='required:true' style='height:26px;width:220px'/>
+			</td>
+			<td align='left'>
+			<label for='sqrq'>申请日期:</label>
+			</td>
+			<td>
+			<input type='text' id='sqrq' name='sqrq' class='easyui-datebox' data-options='required:false' style='height:26px;width:220px'/>
+			</td>
+			<td align='left'>
+			<label for='sqr'>申请人:</label>
+			</td>
+			<td>
+			<input type='text' id='sqr' name='sqr' class='easyui-validatebox' data-options='required:false' style='height:26px;width:220px'/>
+			</td>
+		</tr>
+		<tr>
+			<td align='left'>
+			<label for='sqrgh'>申请人工号:</label>
+			</td>
+			<td>
+			<input type='text' id='sqrgh' name='sqrgh' class='easyui-validatebox' data-options='required:false' style='height:26px;width:220px'/>
+			</td>
+			<td align='left'>
+			<label for='sqrzw'>申请人职位:</label>
+			</td>
+			<td>
+			<input type='text' id='sqrzw' name='sqrzw' class='easyui-validatebox' data-options='required:false' style='height:26px;width:220px'/>
+			</td>
+			<td align='left'>
+			<label for='sqbm'>申请部门:</label>
+			</td>
+			<td>
+			<input type='text' id='sqbm' name='sqbm' class='easyui-validatebox' data-options='required:false' style='height:26px;width:220px'/>
+			</td>
+		</tr>
+		<tr>
+			<td align='left'>
+			<label for='jzlx'>借支类型:</label>
+			</td>
+			<td>
+			<input type='text' id='jzlx' name='jzlx' class='easyui-combobox' data-options='required:false' style='height:26px;width:220px'/>
+			</td>
+			<td align='left'>
+			<label for='jtlx'>具体类型:</label>
+			</td>
+			<td>
+			<input type='text' id='jtlx' name='jtlx' class='easyui-combobox' data-options='required:false' style='height:26px;width:220px'/>
+			</td>
+			<td align='left'>
+			<label for='fkfs'>付款方式:</label>
+			</td>
+			<td>
+			<input type='text' id='fkfs' name='fkfs' class='easyui-combobox' data-options='required:false' style='height:26px;width:220px'/>
+			</td>
+		</tr>
+		<tr>
+			<td align='left'>
+			<label for='khhmc'>开户行名称:</label>
+			</td>
+			<td>
+			<textarea type='text' id='khhmc' name='khhmc' class='easyui-validatebox' data-options='required:false' style='height:50px;width:220px'></textarea>
+			</td>
+			<td align='left'>
+			<label for='yhzh'>银行账号:</label>
+			</td>
+			<td>
+			<textarea type='text' id='yhzh' name='yhzh' class='easyui-validatebox' data-options='required:false' style='height:50px;width:220px'></textarea>
+			</td>
+			<td align='left'>
+			<label for='skrqc'>收款人全称:</label>
+			</td>
+			<td>
+			<input type='text' id='skrqc' name='skrqc' class='easyui-validatebox' data-options='required:false' style='height:26px;width:220px'/>
+			</td>
+		</tr>
+		<tr>
+			<td align='left'>
+			<label for='jzje'>借支金额:</label>
+			</td>
+			<td>
+			<input type='text' id='jzje' name='jzje' class='easyui-numberbox' data-options='required:false' style='height:26px;width:220px'/>
+			</td>
+			<td align='left'>
+			<label for='hkje'>还款金额:</label>
+			</td>
+			<td>
+			<input type='text' id='hkje' name='hkje' class='easyui-numberbox' data-options='required:false' style='height:26px;width:220px'/>
+			</td>
+			<td align='left'>
+			<label for='syje'>剩余金额:</label>
+			</td>
+			<td>
+			<input type='text' id='syje' name='syje' class='easyui-numberbox' data-options='required:false' style='height:26px;width:220px'/>
+			</td>
+		</tr>
+		<tr>
+			<td align='left'>
+			<label for='cnsprq'>出纳审批日期:</label>
+			</td>
+			<td>
+			<input type='text' id='cnsprq' name='cnsprq' class='easyui-datebox' data-options='required:false' style='height:26px;width:220px'/>
+			</td>
+			<td align='left'>
+			<label for='delete_flag'>删除标志:</label>
+			</td>
+			<td>
+			<input type='text' id='delete_flag' name='delete_flag' class='easyui-combobox' data-options='required:false' style='height:26px;width:220px'/>
+			</td>
+			<td align='left'>
+			<label for='remark'>备注:</label>
+			</td>
+			<td>
+			<textarea type='text' id='remark' name='remark' class='easyui-validatebox' data-options='required:false' style='height:50px;width:220px'></textarea>
+			</td>
+		</tr>
+		<tr>
+			<td align='left'>
+			<label for='op_user_name'>操作人:</label>
+			</td>
+			<td>
+			<input type='text' id='op_user_name' name='op_user_name' class='easyui-validatebox' data-options='required:false' style='height:26px;width:220px'/>
+			</td>
+			<td align='left'>
+			<label for='creator'>创建人id:</label>
+			</td>
+			<td>
+			<input type='text' id='creator' name='creator' class='easyui-validatebox' data-options='required:false' style='height:26px;width:220px'/>
+			</td>
+			<td align='left'>
+			<label for='creator_name'>创建人:</label>
+			</td>
+			<td>
+			<input type='text' id='creator_name' name='creator_name' class='easyui-validatebox' data-options='required:false' style='height:26px;width:220px'/>
+			</td>
+		</tr>
+
+		</table>
+	</form>
+		<div id="icon"></div>
+	</div>
+	<div class="button-section">
+		<a id="btn_save" href="#" class="easyui-linkbutton" iconCls="icon-ok">确定</a>
+		<a id="btn_cancel" href="#" class="easyui-linkbutton" iconCls="icon-cancel">取消</a>
+	</div>
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" type="text/css" href="../../js/jquery-easyui/themes/gray/easyui.css"/>
+	<link rel="stylesheet" type="text/css" href="../../js/jquery-easyui/themes/icon.css"/>
+	<link rel="stylesheet" type="text/css" href="../../css/common.css"/>
+	<script type="text/javascript" src="../../js/jquery-easyui/jquery.min.js"></script>
+	<script type="text/javascript" src="../../js/jquery-easyui/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="../../js/jquery-easyui/locale/easyui-lang-zh_CN.js"></script>
+	<script type="text/javascript" src="../../js/cip-page1.0.js"></script>
+	<script type="text/javascript" src="../../js/jcdf-contants-1.0.js"></script>
+	<script type="text/javascript" src="../../js/dy_pagetools_1.0.js"></script>
+	<script type="text/javascript" src="../../logic/statement/bms_statement_borrowing_list.js"></script>
+	<script type="text/javascript" >
+		$(document).ready(init);
+	</script>
+</head> 
+<body class="easyui-layout">
+<div data-options="region:'north', split:false, border:false" style="height:100%">
+
+	<div id="batch_clear" class="easyui-dialog" title="借支核销" style="width:600px;height:400px;"
+		 data-options="resizable:true,modal:true" closed="true">
+
+		<form id="form_bms_statement_borrowing_clear_form" class="form" >
+			<table>
+				<tr>
+					<td align='right'>
+						<label for='lcbh'>借支工作流:</label>
+					</td>
+					<td>
+						<input type='text' id='lcbh' name='lcbh' class='easyui-validatebox' data-options='required:true' readonly="readonly" style='height:26px;width:220px;'/>
+					</td>
+
+					<td align='right'>
+						<label for='sqr'>借支申请人:</label>
+					</td>
+					<td>
+						<input type='text' id='sqr' name='sqr' class='easyui-validatebox' data-options='required:false' readonly="readonly" style='height:26px;width:220px'/>
+					</td>
+				</tr>
+
+				<tr>
+					<td align='right'>
+						<label for='sqrgh'>申请人工号:</label>
+					</td>
+					<td>
+						<input type='text' id='sqrgh' name='sqrgh' class='easyui-validatebox' data-options='required:false' readonly="readonly" style='height:26px;width:220px;'/>
+					</td>
+
+					<td align='right'>
+						<label for='sqbm_name'>申请部门:</label>
+					</td>
+					<td>
+						<input type='text' id='sqbm_name' name='sqbm_name' class='easyui-validatebox' data-options='required:false' readonly="readonly" style='height:26px;width:220px'/>
+					</td>
+				</tr>
+				<tr>
+					<td align='right'>
+						<label for='jzlx_name'>借支类型:</label>
+					</td>
+					<td>
+						<input type='text' id='jzlx_name' name='jzlx_name' class='easyui-validatebox' data-options='required:false'  readonly="readonly" style='height:26px;width:220px'/>
+					</td>
+
+					<td align='right'>
+						<label for='jtlx_name'>具体类型:</label>
+					</td>
+					<td>
+						<input type='text' id='jtlx_name' name='jtlx_name' class='easyui-validatebox' data-options='required:false'  readonly="readonly" style='height:26px;width:220px'/>
+					</td>
+				</tr>
+				<tr>
+					<td align='right'>
+						<label for='fkfs_name'>付款方式:</label>
+					</td>
+					<td>
+						<input type='text' id='fkfs_name' name='fkfs_name' class='easyui-validatebox' data-options='required:false'  readonly="readonly" style='height:26px;width:220px'/>
+					</td>
+
+					<td align='right'>
+						<label for='jzje'>借支金额:</label>
+					</td>
+					<td>
+						<input type='text' id='jzje' name='jzje' class='easyui-validatebox' data-options='required:false'   readonly="readonly" style='height:26px;width:220px'/>
+					</td>
+				</tr>
+				<tr hidden="hidden">
+					<td align='right' >
+						<label for='syje'>剩余金额:</label>
+					</td>
+					<td>
+						<input type='text' id='syje' name='syje' class='easyui-validatebox' data-options='required:false'   readonly="readonly" style='height:26px;width:220px'/>
+					</td>
+                </tr>
+                <tr>
+					<td align='right'>
+						<label for='hkfs'>还款方式:</label>
+					</td>
+					<td>
+						<input type='text' id='hkfs' name='hkfs' class='easyui-combobox' data-options='required:true'   style='height:26px;width:220px'/>
+					</td>
+
+					<td align='right'>
+						<label for='hkje'>还款金额:</label>
+					</td>
+					<td>
+						<input type='text' id='hkje' name='hkje' class='easyui-validatebox' data-options='required:true'  onkeyup="checkFee(this)" maxlength="12" style='height:26px;width:220px'/>
+					</td>
+                </tr>
+                <tr>
+					<td align='right'>
+						<label for='hkrq'>还款日期:</label>
+					</td>
+					<td>
+						<input type='text' id='hkrq' name='hkrq' class='easyui-datebox' data-options='required:true'   style='height:26px;width:220px'/>
+					</td>
+				</tr>
+				<tr>
+					<td align='right'>
+						<label for='remark'>备注:</label>
+					</td>
+					<td colspan="3">
+                        <textarea  id='remark' name='remark' class='easyui-validatebox' data-options='required:false' style='height:54px;width:500px'></textarea>
+					</td>
+				</tr>
+
+			</table>
+		</form>
+		<div class="button-section">
+			<a id="btn_save" href="#" class="easyui-linkbutton" iconCls="icon-ok">提交</a>
+			<a id="btn_cancel" href="#" class="easyui-linkbutton" iconCls="icon-cancel">取消</a>
+		</div>
+
+	</div>
+
+
+
+
+	<div id="mycx" name="查询条件区"></div>
+	<div id="bms_statement_borrowing_list_menu">
+		<a href="#" class="easyui-linkbutton" iconCls="icon-search" onclick="Search('bms_statement_borrowing_searchData',700,500)">查询</a>
+	</div>
+	<table id="bms_statement_borrowing_list" fit="true"  style="width:100%;height:100%;"></table>
+</div>	
+</body>
+</html>

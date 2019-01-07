@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.yd.bms</groupId>
+  <artifactId>bms-parent</artifactId>
+  <version>v1.0.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>bms-parent</name>
+  
+  <parent>
+      <groupId>com.yd.maven.pom</groupId>
+      <artifactId>parent-pom</artifactId>
+      <version>v1.0.0-SNAPSHOT</version>
+  </parent>
+
+
+    <modules>
+      <module>bms-input</module>
+      <module>bms-job</module>
+    <module>bms-ui</module>
+    <module>bms-api</module>
+    <module>bms-model</module>
+  </modules>
+</project>

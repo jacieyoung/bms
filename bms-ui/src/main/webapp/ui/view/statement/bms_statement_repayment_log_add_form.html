@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" type="text/css" href="../../js/jquery-easyui/themes/gray/easyui.css"/>
+	<link rel="stylesheet" type="text/css" href="../../js/jquery-easyui/themes/icon.css"/>
+	<link rel="stylesheet" type="text/css" href="../../css/common.css"/>
+	<script type="text/javascript" src="../../js/jquery-easyui/jquery.min.js"></script>
+	<script type="text/javascript" src="../../js/jquery-easyui/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="../../js/jquery-easyui/locale/easyui-lang-zh_CN.js"></script>
+	<script type="text/javascript" src="../../js/cip-page1.0.js"></script>
+	<script type="text/javascript" src="../../js/jcdf-contants-1.0.js"></script>
+	<script type="text/javascript" src="../../logic/statement/bms_statement_repayment_log_add_form.js"></script>
+	<script type="text/javascript" >
+		$(document).ready(init);
+	</script>
+</head>
+<body>
+	<div id="area_form">
+	<form id="form_bms_statement_repayment_log" class="form">
+		<table>
+		<tr>
+			<td align='left'>
+			<label for='serial_no'>流水号:</label>
+			</td>
+			<td>
+			<input type='text' id='serial_no' name='serial_no' class='easyui-validatebox' data-options='required:true' style='height:26px;width:220px'/>
+			</td>
+			<td align='left'>
+			<label for='lcbh'>流程编号:</label>
+			</td>
+			<td>
+			<input type='text' id='lcbh' name='lcbh' class='easyui-validatebox' data-options='required:false' style='height:26px;width:220px'/>
+			</td>
+		</tr>
+		<tr>
+			<td align='left'>
+			<label for='hkrq'>还款日期:</label>
+			</td>
+			<td>
+			<input type='text' id='hkrq' name='hkrq' class='easyui-datebox' data-options='required:false' style='height:26px;width:220px'/>
+			</td>
+			<td align='left'>
+			<label for='hkfs'>还款方式:</label>
+			</td>
+			<td>
+			<input type='text' id='hkfs' name='hkfs' class='easyui-validatebox' data-options='required:false' style='height:26px;width:220px'/>
+			</td>
+		</tr>
+		<tr>
+			<td align='left'>
+			<label for='hxje'>核销金额:</label>
+			</td>
+			<td>
+			<input type='text' id='hxje' name='hxje' class='easyui-numberbox' data-options='required:false' style='height:26px;width:220px'/>
+			</td>
+			<td align='left'>
+			<label for='syje'>剩余金额:</label>
+			</td>
+			<td>
+			<input type='text' id='syje' name='syje' class='easyui-numberbox' data-options='required:false' style='height:26px;width:220px'/>
+			</td>
+		</tr>
+		<tr>
+			<td align='left'>
+			<label for='hxr'>核销人:</label>
+			</td>
+			<td>
+			<input type='text' id='hxr' name='hxr' class='easyui-validatebox' data-options='required:false' style='height:26px;width:220px'/>
+			</td>
+			<td align='left'>
+			<label for='cjzgzl'>冲借支工作流:</label>
+			</td>
+			<td>
+			<input type='text' id='cjzgzl' name='cjzgzl' class='easyui-validatebox' data-options='required:false' style='height:26px;width:220px'/>
+			</td>
+		</tr>
+		<tr>
+			<td align='left'>
+			<label for='delete_flag'>删除标志:</label>
+			</td>
+			<td>
+			<input type='text' id='delete_flag' name='delete_flag' class='easyui-combobox' data-options='required:false' style='height:26px;width:220px'/>
+			</td>
+			<td align='left'>
+			<label for='remark'>备注:</label>
+			</td>
+			<td>
+			<textarea type='text' id='remark' name='remark' class='easyui-validatebox' data-options='required:false' style='height:50px;width:220px'></textarea>
+			</td>
+		</tr>
+		<tr>
+			<td align='left'>
+			<label for='op_user_name'>操作人:</label>
+			</td>
+			<td>
+			<input type='text' id='op_user_name' name='op_user_name' class='easyui-validatebox' data-options='required:false' style='height:26px;width:220px'/>
+			</td>
+			<td align='left'>
+			<label for='creator'>创建人id:</label>
+			</td>
+			<td>
+			<input type='text' id='creator' name='creator' class='easyui-validatebox' data-options='required:false' style='height:26px;width:220px'/>
+			</td>
+		</tr>
+		<tr>
+			<td align='left'>
+			<label for='creator_name'>创建人:</label>
+			</td>
+			<td>
+			<input type='text' id='creator_name' name='creator_name' class='easyui-validatebox' data-options='required:false' style='height:26px;width:220px'/>
+			</td>
+		</tr>
+
+		</table>
+	</form>
+		<div id="icon"></div>
+	</div>
+	<div class="button-section">
+		<a id="btn_save" href="#" class="easyui-linkbutton" iconCls="icon-ok">确定</a>
+		<a id="btn_cancel" href="#" class="easyui-linkbutton" iconCls="icon-cancel">取消</a>
+	</div>
+</body>
+</html>

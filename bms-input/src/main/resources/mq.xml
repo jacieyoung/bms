@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:jee="http://www.springframework.org/schema/jee"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+	http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.0.xsd
+	http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+	http://www.springframework.org/schema/tx  http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+	http://www.springframework.org/schema/aop  http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+	http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.0.xsd
+	http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit-1.4.xsd">
+
+    <!-- 引入属性文件 -->
+    <context:property-placeholder location="classpath:mq.properties" ignore-unresolvable="true"/>
+
+    <!-- 不适用【发布确认】连接配置 -->
+    <rabbit:connection-factory id="connectionFactory"
+                               host="${rabbitmq.host}" username="${rabbitmq.username}" password="${rabbitmq.password}"
+                               port="${rabbitmq.port}"
+
+                               virtual-host="/" channel-cache-size="25" cache-mode="CHANNEL" publisher-confirms="true"
+                               publisher-returns="true" connection-timeout="200"/>
+    <bean id="retryTemplate" class="org.springframework.retry.support.RetryTemplate">
+        <property name="backOffPolicy">
+            <bean class="org.springframework.retry.backoff.ExponentialBackOffPolicy">
+                <property name="initialInterval" value="200"/>
+                <property name="maxInterval" value="30000"/>
+            </bean>
+        </property>
+        <property name="retryPolicy">
+            <bean class="org.springframework.retry.policy.SimpleRetryPolicy">
+                <property name="maxAttempts" value="5"/>
+            </bean>
+        </property>
+    </bean>
+
+
+    <!--通过指定下面的admin信息，当前producer中的exchange和queue会在rabbitmq服务器上自动生成 如果使用多exchange必须配置declared-by="connectAdmin" -->
+    <rabbit:admin id="connectAdmin" connection-factory="connectionFactory"/>
+
+    <rabbit:queue id="BMS_STATEMENT_BORROWING_QUEUE" name="${rabbitmq.queue.BMS_STATEMENT_BORROWING_QUEUE}"
+                  durable="true" auto-delete="false" exclusive="false" declared-by="connectAdmin"/>
+    <rabbit:queue id="BMS_STATEMENT_REPAYMENT_QUEUE" name="${rabbitmq.queue.BMS_STATEMENT_REPAYMENT_QUEUE}"
+                  durable="true" auto-delete="false" exclusive="false" declared-by="connectAdmin"/>
+
+    <bean id="bmsBorrowingCounsumer" class="com.yd.bms.statement.consumer.BmsBorrowingCounsumer"/>
+    <bean id="bmsRepaymentCounsumer" class="com.yd.bms.statement.consumer.BmsRepaymentCounsumer"/>
+
+    <!--&lt;!&ndash; listener配置 消费者 自动确认 &ndash;&gt;-->
+    <!--&lt;!&ndash; queues：监听的队列，多个的话用逗号（,）分隔 ref：监听器 &ndash;&gt;-->
+    <rabbit:listener-container connection-factory="connectionFactory" acknowledge="auto">
+        <rabbit:listener queues="${rabbitmq.queue.BMS_STATEMENT_BORROWING_QUEUE}" ref="bmsBorrowingCounsumer"/>
+    </rabbit:listener-container>
+
+    <rabbit:listener-container connection-factory="connectionFactory" acknowledge="auto">
+        <rabbit:listener queues="${rabbitmq.queue.BMS_STATEMENT_REPAYMENT_QUEUE}" ref="bmsRepaymentCounsumer"/>
+    </rabbit:listener-container>
+
+
+</beans>

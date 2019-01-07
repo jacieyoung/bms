@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+
+	http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+	http://www.springframework.org/schema/tx  http://www.springframework.org/schema/tx/spring-tx-4.0.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
+
+    <mvc:annotation-driven/>
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+
+    <bean id="dataSource"
+          class="com.yd.utils.datasource.YDDriverManagerDataSource">
+        <property name="name">
+            <value>bms</value>
+        </property>
+        <property name="poolName">
+            <value>DRUID</value>
+        </property>
+    </bean>
+
+
+    <!-- SPRING JDBC -->
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <bean id="namedParameterJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+        <constructor-arg ref="dataSource"/>
+    </bean>
+
+    <!-- SPRING 事务管理-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!--  应用上线文初始化Bean-->
+    <!--<bean class="com.yd.common.runtime.CIPRuntimeContextInitializer"/>-->
+
+    <bean id="properties"
+          class="com.yd.utils.resource.SpringAllPropertiesUtils">
+    </bean>
+    <!-- dao,service,controller,component scan -->
+    <context:component-scan base-package="com.yd.utils"/>
+    <!--<context:component-scan base-package="com.dy.bms" />-->
+    <context:component-scan base-package="com.yd.bms"/>
+    <task:executor id="executor" pool-size="5"/>
+    <task:scheduler id="scheduler" pool-size="10"/>
+    <task:annotation-driven executor="executor" scheduler="scheduler"/>
+
+
+
+</beans>
